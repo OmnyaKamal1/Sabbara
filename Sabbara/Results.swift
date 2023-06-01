@@ -47,7 +47,8 @@ struct FirstCodeView: View {
             let offset: CGFloat = 10
             let Offset : CGFloat = 5
             
-            Text("Results")
+            Text(NSLocalizedString("Results", comment: ""))
+            //Text("Results")
                 .foregroundColor(Color.black)
                 .modifier(BigAndMediumButtonTextModifier())
             
@@ -55,7 +56,8 @@ struct FirstCodeView: View {
                 Image("ResultboardFill")
                     .resizable()
                     .frame(width: 386,height: 64)
-                Text("point")
+                Text(NSLocalizedString("Point", comment: ""))
+             
                     .foregroundColor(.black)
                     .bold()
                     .font(.custom("TufuliArabicDEMO-Medium", size: 24))
@@ -283,7 +285,6 @@ struct BottomSheet: View {
                         )}
             }.padding(.top,40)
             //Spacer()
-            
             
             VStack {
                 ZStack {
