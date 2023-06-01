@@ -12,6 +12,7 @@ struct SabbaraApp: App {
     var body: some Scene {
         WindowGroup {
             AllModifiers()
+            
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environment(\.locale, .init(identifier: "ar"))
                 .environment(\.layoutDirection, .rightToLeft)
