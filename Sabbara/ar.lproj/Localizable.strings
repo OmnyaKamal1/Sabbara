@@ -8,3 +8,12 @@
 "Start_game" = "ابدأ اللعب";
 "Save" = "حفظ";
 "Continue" = "المتابعة";
+// Mark: localaztion for page result
+"Results" = "النتائج";
+"point" = "النقاط";
+"Replay Round" = "عيد الجولة";
+"End Round" = " انهى الجولة";
+"Point" = "نقاط";
+"Team 1" = "الفريق الاول";
+"Team 2" = "الفريق الثاني";
+

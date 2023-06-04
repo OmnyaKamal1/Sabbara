@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8A05550E2A289DB9003E18C6 /* SabbaragameMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8A05550D2A289DB9003E18C6 /* SabbaragameMusic.mp3 */; };
+		8A33BA8B2A29AC1D00504556 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A33BA8A2A29AC1D00504556 /* GoogleService-Info.plist */; };
+		8A33BA8E2A29AD7700504556 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8A33BA8D2A29AD7700504556 /* FirebaseAnalytics */; };
+		8A33BA902A29AD7700504556 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8A33BA8F2A29AD7700504556 /* FirebaseAnalyticsSwift */; };
 		A23062782A1D2C8400574AC4 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23062772A1D2C8400574AC4 /* Splash.swift */; };
 		A230627A2A1D2CA200574AC4 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23062792A1D2CA200574AC4 /* MainPage.swift */; };
 		A230627C2A1D2D1600574AC4 /* GameStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A230627B2A1D2D1600574AC4 /* GameStart.swift */; };
@@ -30,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		8A05550D2A289DB9003E18C6 /* SabbaragameMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SabbaragameMusic.mp3; sourceTree = "<group>"; };
+		8A33BA8A2A29AC1D00504556 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A23062772A1D2C8400574AC4 /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
 		A23062792A1D2CA200574AC4 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 		A230627B2A1D2D1600574AC4 /* GameStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStart.swift; sourceTree = "<group>"; };
@@ -58,6 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A33BA902A29AD7700504556 /* FirebaseAnalyticsSwift in Frameworks */,
+				8A33BA8E2A29AD7700504556 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,15 +97,15 @@
 		A2E9C36A2A121BC0006D3B82 /* Sabbara */ = {
 			isa = PBXGroup;
 			children = (
+				8A33BA8A2A29AC1D00504556 /* GoogleService-Info.plist */,
 				8A05550D2A289DB9003E18C6 /* SabbaragameMusic.mp3 */,
+				A2855F922A166DD7002F6A28 /* Info.plist */,
+				A2E9C3762A121BC1006D3B82 /* Sabbara.xcdatamodeld */,
 				A2B6AAED2A1FF522001C1336 /* Localizable.strings */,
-				A2E9C36F2A121BC1006D3B82 /* Assets.xcassets */,
 				A2E9C36B2A121BC0006D3B82 /* SabbaraApp.swift */,
 				A2E9C36D2A121BC0006D3B82 /* ContentView.swift */,
 				A2855F8C2A161685002F6A28 /* AllModifiers.swift */,
 				A2E9C3742A121BC1006D3B82 /* Persistence.swift */,
-				A2855F922A166DD7002F6A28 /* Info.plist */,
-				A2E9C3762A121BC1006D3B82 /* Sabbara.xcdatamodeld */,
 				A23062772A1D2C8400574AC4 /* Splash.swift */,
 				A23062792A1D2CA200574AC4 /* MainPage.swift */,
 				A230627B2A1D2D1600574AC4 /* GameStart.swift */,
@@ -109,6 +115,7 @@
 				A230628D2A1E035700574AC4 /* PlayTeam.swift */,
 				A230628F2A1E037900574AC4 /* CharacterCustomised.swift */,
 				A23062912A1E03AC00574AC4 /* CreateOrEditRound.swift */,
+				A2E9C36F2A121BC1006D3B82 /* Assets.xcassets */,
 				A2855F8E2A166C60002F6A28 /* Fonts */,
 				A2E9C3712A121BC1006D3B82 /* Preview Content */,
 			);
@@ -139,6 +146,10 @@
 			dependencies = (
 			);
 			name = Sabbara;
+			packageProductDependencies = (
+				8A33BA8D2A29AD7700504556 /* FirebaseAnalytics */,
+				8A33BA8F2A29AD7700504556 /* FirebaseAnalyticsSwift */,
+			);
 			productName = Sabbara;
 			productReference = A2E9C3682A121BC0006D3B82 /* Sabbara.app */;
 			productType = "com.apple.product-type.application";
@@ -168,6 +179,9 @@
 				ar,
 			);
 			mainGroup = A2E9C35F2A121BC0006D3B82;
+			packageReferences = (
+				8A33BA8C2A29AD7700504556 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = A2E9C3692A121BC0006D3B82 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -187,6 +201,7 @@
 				A2E9C3732A121BC1006D3B82 /* Preview Assets.xcassets in Resources */,
 				A2E9C3702A121BC1006D3B82 /* Assets.xcassets in Resources */,
 				8A05550E2A289DB9003E18C6 /* SabbaragameMusic.mp3 in Resources */,
+				8A33BA8B2A29AC1D00504556 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,7 +368,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sabbara/Preview Content\"";
-				DEVELOPMENT_TEAM = Z6KZNQG7LM;
+				DEVELOPMENT_TEAM = 6NJFK7MSA4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sabbara/Info.plist;
@@ -383,7 +398,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sabbara/Preview Content\"";
-				DEVELOPMENT_TEAM = Z6KZNQG7LM;
+				DEVELOPMENT_TEAM = 6NJFK7MSA4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sabbara/Info.plist;
@@ -427,6 +442,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8A33BA8C2A29AD7700504556 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8A33BA8D2A29AD7700504556 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8A33BA8C2A29AD7700504556 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		8A33BA8F2A29AD7700504556 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8A33BA8C2A29AD7700504556 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		A2E9C3762A121BC1006D3B82 /* Sabbara.xcdatamodeld */ = {

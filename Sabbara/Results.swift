@@ -6,6 +6,11 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseAnalytics
+
+
+//MARK: this it the main view
 
 struct Results: View {
     
@@ -39,16 +44,19 @@ struct Results: View {
 }
 
 
-
+//MARK: First code struct implementation (quick game)
 struct FirstCodeView: View {
+    
+    @State private var navigateToTeamPlay = false
+    
     var body: some View {
-        // First code struct implementation (quick game)
+        
+        let offset: CGFloat = 10
+        let Offset : CGFloat = 5
+        
         VStack{ //open vstack
-            let offset: CGFloat = 10
-            let Offset : CGFloat = 5
             
-            Text(NSLocalizedString("Results", comment: ""))
-            //Text("Results")
+            Text(NSLocalizedString("Results", comment: "")) // loclaztion
                 .foregroundColor(Color.black)
                 .modifier(BigAndMediumButtonTextModifier())
             
@@ -56,44 +64,54 @@ struct FirstCodeView: View {
                 Image("ResultboardFill")
                     .resizable()
                     .frame(width: 386,height: 64)
-                Text(NSLocalizedString("Point", comment: ""))
-             
+                Text(NSLocalizedString("Point", comment: ""))  // loclaztion
                     .foregroundColor(.black)
-                    .bold()
                     .font(.custom("TufuliArabicDEMO-Medium", size: 24))
             }// end zstack
             
             
             ZStack{ // open zstack
                 
-                Rectangle()
+                Rectangle() // shadow Rectangle
                     .frame(width:344,height: 423)
                     .foregroundColor(Color("LYellowShadow"))
                     .cornerRadius(10)
                     .offset (x: Offset ,y: offset)
                 
                 
-                Rectangle()
+                Rectangle() // regler Rectangle
                     .frame(width:344,height: 423)
                     .foregroundColor(Color("LYellow"))
                     .cornerRadius(10)
                 
                 
-                ScrollView {
-                    //VStack {
+                ScrollView { // it will change base on the words f
+                    //MARK: FIX
+                  
                     ForEach(1...20, id: \.self) { index in
-                        Text("كلم,,,,,,,,,,,,,,,ه \(index)")
-                            .padding()
-                        // }
+                        Text("كلم,,,ه \(index)")
+                           .padding()
+                        
                     }
                     .frame(width: 340)
                 }
                 .frame( height: 380)
-            }// end zstackm
+            }// end zstack
             
-            .padding()
+           .padding()
+            
+             //MARK: FIRST BUTTON
+            
+            NavigationLink(
+                        destination: MainPage(),
+                        isActive: $navigateToTeamPlay,
+                        label: { EmptyView() }
+                    )
+                    .hidden()
+            
             Button(action: {
-                // ... replay round action ...
+                trackButtonEvent(buttonName: "Replay Round")
+                navigateToTeamPlay = true
             }) {
                 Text("Replay Round")
                 Image(systemName: "arrow.counterclockwise")
@@ -102,20 +120,36 @@ struct FirstCodeView: View {
             .buttonStyle(BigButton3D())
             .modifier(BigAndMediumButtonTextModifier())
             .padding()
+           
             
-            Button("End Round"){}
-                .foregroundColor(Color("Lpink"))
-                .buttonStyle(WhBigButton3D()).modifier(BigAndMediumButtonTextModifier())
+            //MARK: SECOUND BUTTON
+            Button(action: {
+                trackButtonEvent(buttonName: "End Round")
+            }) {
+                Text("End Round")
+            }
+            
+            .foregroundColor(Color("Lpink"))
+            .buttonStyle(WhBigButton3D()).modifier(BigAndMediumButtonTextModifier())
             
             Spacer()
             
             
         }// end vstack
+        .onAppear {
+            if FirebaseApp.app() == nil {
+                FirebaseApp.configure()
+            }
+        }
     }
 }
 
 
+//MARK: Second code struct implementation (Team game)
 struct SecondCodeView: View {
+    @State private var navigateToMainPage = false
+    @State private var navigateToPlayTeam = false
+    @State private var navigateToTeamPlay = false
     @State var showingBottomSheet = false
     @State var words: [(String, Int)] = [("Word 1", 1), ("Word 2", 0), ("Word 3", 1), ("Word 4", 0)]
     @State var team1Points = 0
@@ -138,10 +172,7 @@ struct SecondCodeView: View {
                     .frame(width: 94, height: 94)
                     .foregroundColor(Color.black)
                     .padding(.bottom)
-                //                Image("SabbaraChar1")
-                //                    .resizable()
-                //                    .frame(width: 79.31, height: 64.63)
-                //                    .padding(.bottom)
+               
             }
             
             
@@ -168,8 +199,9 @@ struct SecondCodeView: View {
                         }
                         Text("Team 1")
                         Spacer().frame(width: 90)
-                        Text("\(team1Points) point")
+                        Text("\(team1Points) \(NSLocalizedString("point", comment: ""))")
                         Button {
+                            trackButtonEvent(buttonName: "DropdownIcon")
                             showingBottomSheet.toggle()
                         } label: {
                             Image("DropdownIcon")
@@ -186,7 +218,7 @@ struct SecondCodeView: View {
                 .padding()
             }
             
-
+            
             HStack {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
@@ -210,8 +242,9 @@ struct SecondCodeView: View {
                         }
                         Text("Team 2")
                         Spacer().frame(width: 90)
-                        Text("\(team1Points) point")
+                        Text("\(team1Points) \(NSLocalizedString("point", comment: ""))")
                         Button {
+                            trackButtonEvent(buttonName: "Dropdown Result")
                             showingBottomSheet.toggle()
                         } label: {
                             Image("DropdownIcon")
@@ -220,7 +253,7 @@ struct SecondCodeView: View {
                             BottomSheet(words: words)
                                 .presentationDetents([.medium])
                                 .presentationDragIndicator(.visible)
-        
+                            
                         }
                         
                     }
@@ -232,31 +265,48 @@ struct SecondCodeView: View {
             Spacer()
                 .padding()
             
-            Button(action: {
-                // ... replay round action ...
-            }) {
+            Button {
+                trackButtonEvent(buttonName: "Replay Round")
+                navigateToPlayTeam = true
+            } label: {
+                
                 Text("Replay Round")
                 Image(systemName: "arrow.counterclockwise")
                     .foregroundColor(.white).padding(.leading,200)
-            }
-            .buttonStyle(BigButton3D())
-            .modifier(BigAndMediumButtonTextModifier())
+                
+            }.buttonStyle(BigButton3D())
+                .modifier(BigAndMediumButtonTextModifier())
+                .padding()
             
-            Button("End Round") {
-                // ... end round action ...
-            }
-            .foregroundColor(Color("Lpink"))
-            .buttonStyle(WhBigButton3D())
-            .modifier(BigAndMediumButtonTextModifier())
-            .padding()
             
-        
+
+            
+            Button {
+                trackButtonEvent(buttonName: "End Round")
+                navigateToMainPage = true
+            } label: {
+                
+                    Text("End Round")
+                   
+            } .foregroundColor(Color("Lpink"))
+                .buttonStyle(WhBigButton3D())
+                .modifier(BigAndMediumButtonTextModifier())
+                .padding()
+                
+
+            
             
         }
+        .fullScreenCover(isPresented: $navigateToPlayTeam) {
+            PlayTeam()}
+            
+        .fullScreenCover(isPresented: $navigateToMainPage) {
+                    MainPage()
+                }
     }
 }
 
-
+//MARK: Bottom sheet struct for second code so
 struct BottomSheet: View {
     @State private var offset: CGFloat = 10
     @State private var Offset: CGFloat = 5
@@ -317,12 +367,12 @@ struct BottomSheet: View {
     }
 }
 
-class SheetPresentationDelegate1: NSObject, UIAdaptivePresentationControllerDelegate {
-    var height: CGFloat = .zero
-    
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        // Handle dismissal if needed
-    }
+
+//MARK: func for firebase
+func trackButtonEvent(buttonName: String) {
+    Analytics.logEvent("button_click", parameters: [
+        "button_name": buttonName
+    ])
 }
 
 
