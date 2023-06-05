@@ -49,6 +49,12 @@ struct AddRoundView: View {
                     submitAction()
                     
                     //isEnteringWords = true
+                },BackAction: {
+                    isEnteringWords = true
+
+//                    isEnteringImages = false
+                    //submitAction()
+                    
                 })
                 .navigationBarHidden(true)
             } else {
@@ -70,8 +76,10 @@ struct AddRoundView: View {
                 colorsShadow: colorsShadow,
                 context: managedObjContext)
             dismiss()
+            
         } else {
-            errorMessage = "Minimum word count not met. Please enter at least 20 words."
+            errorMessage = "Minimum word count not met. Please enter at least 20 words."                    //.font(.custom("TufuliArabicDEMO-Medium", size: 24))
+
         }
     }
 }
@@ -81,8 +89,13 @@ struct ImageSelectionView: View {
     @Binding var selectedcolors: String
     @Binding var selectedcolorsShadow: String
     
-    
+
     var nextAction: () -> Void
+    var BackAction: () -> Void
+
+//    var BackAction: () -> Void
+//
+//    var nextAction: () -> Void
     @State private var selectedColor: Color = Color("DGreen")
     @State private var selectedShadow: Color = Color("DGreenShadow")
     @State private var selectedSabbara: Image = Image("SabbaraChar2")
@@ -112,10 +125,12 @@ struct ImageSelectionView: View {
                 }
                 
                 
-                
-                VStack {
+                Spacer()
+                VStack(alignment: .leading){
                     Text("Choose your color")
-                        .font(.title2)
+                        .font(.custom("TufuliArabicDEMO-Medium", size: 24))
+
+                        //.font(.title2)
                         .fontWeight(.regular)
                         .foregroundColor(.black)
                         .multilineTextAlignment(.trailing)
@@ -199,9 +214,10 @@ struct ImageSelectionView: View {
                     //                Spacer()
                 } //VStackColorsAndCactus
                 .padding()
-                VStack {
+                Spacer()
+                VStack(alignment: .leading){
                     Text("Choose your Sabbara")
-                        .font(.title2)
+                        .font(.custom("TufuliArabicDEMO-Medium", size: 24))
                         .fontWeight(.regular)
                         .foregroundColor(.black)
                         .multilineTextAlignment(.trailing)
@@ -259,15 +275,20 @@ struct ImageSelectionView: View {
             //MARK: -
             
             HStack{
-                Button("Back") {
-                    //nextAction()
-                }
-                .buttonStyle(SmallButton3D()).modifier(SmallButtonTextModifier())//
-                
+               
                 Button("Next") {
                     nextAction()
                 }
+                
                 .buttonStyle(SmallButton3D()).modifier(SmallButtonTextModifier())
+                
+                Button("Back") {
+                    BackAction()
+                    //nextAction()
+                }
+                .foregroundColor(Color("Lpink"))
+                .buttonStyle(WhSmallButton3D()).modifier(BigAndMediumButtonTextModifier())
+
             }
             
         }
@@ -287,7 +308,9 @@ struct NameEntryView: View {
         VStack(/*alignment: .leading*/){
             //Spacer()
             VStack(alignment: .leading){
-                Text("Enter Round Name")
+                Text("Round Name")
+                    .font(.custom("TufuliArabicDEMO-Medium", size: 24))
+
                     .font(.title3)
                 //.padding()
                 ZStack {
@@ -309,21 +332,22 @@ struct NameEntryView: View {
                 }
             }
             Text("Maximum 25 letters")
-                .font(.caption2)
+                .font(.custom("TufuliArabicDEMO-Medium", size: 18))
+
             Spacer()
             Spacer()
             HStack{
-                Button("Back") {
-                    //
-                    //ImageSelectionView()
-                    nextAction()
-                }
-                .buttonStyle(SmallButton3D()).modifier(SmallButtonTextModifier())
+//                Button("Back") {
+//                    //
+//                    //ImageSelectionView()
+//                    nextAction()
+//                }
+//                .buttonStyle(SmallButton3D()).modifier(SmallButtonTextModifier())
                 Button("Next") {
                     nextAction()
                 }
-                .buttonStyle(SmallButton3D()).modifier(SmallButtonTextModifier())
-                
+                .buttonStyle(BigButton3D()).modifier(BigAndMediumButtonTextModifier())
+
             }
         }.padding()
             .padding()
@@ -344,7 +368,11 @@ struct WordEntryView: View {
         VStack {
             VStack(alignment: .leading){
                 
-                Text("Enter Words")
+                Text("Words")
+                    .font(.custom("TufuliArabicDEMO-Medium", size: 24))
+
+                    //.modifier(BigAndMediumButtonTextModifier())
+
                     .font(.title3)
                     .padding()
                 
@@ -382,7 +410,7 @@ struct WordEntryView: View {
                                     Image(systemName:"trash.circle.fill" )
                                         .resizable()
                                         .frame(width: 25, height: 25)
-                                        .foregroundColor(.red)
+                                        .foregroundColor(Color("Lpink"))
                                         .onTapGesture {
                                             deleteWord(at: index)
                                         }
@@ -414,9 +442,23 @@ struct WordEntryView: View {
                     .foregroundColor (Color("LYellow"))
                 
                 //                    Section() {
-                Button(action: addWord) {
-                    Label("Add Word", systemImage: "plus.circle")
-                }
+                //                Button(action: addWord) {
+                //                    Label("Add Word", systemImage: "plus.circle")
+                //                }
+                HStack{
+                    Text("Add Word")
+                        .font(.custom("TufuliArabicDEMO-Medium", size: 18))
+                        .foregroundColor(.white)
+
+                Image(systemName:"plus.circle" )
+                    .resizable()
+                    .frame(width: 25, height: 25)
+                    .foregroundColor(Color("Lpink"))
+                    .onTapGesture {
+                        addWord()
+                        //deleteWord(at: index)
+                    }
+            }
                 
             }
             
@@ -424,6 +466,8 @@ struct WordEntryView: View {
             
             
             Text(errorMessage)
+                .font(.custom("TufuliArabicDEMO-Medium", size: 18))
+
                 .foregroundColor(.red)
                 .padding()
             

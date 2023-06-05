@@ -8,13 +8,21 @@ import SwiftUI
 @main
 struct SabbaraApp: App {
     let persistenceController = PersistenceController.shared
+    @StateObject private var dataController = DataController()
 
     var body: some Scene {
         WindowGroup {
-            AllModifiers()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ContentView()
+                .environment(\.managedObjectContext,
+                              dataController.container.viewContext)
                 .environment(\.locale, .init(identifier: "ar"))
                 .environment(\.layoutDirection, .rightToLeft)
+            
+            //AllModifiers()
+
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+//                .environment(\.locale, .init(identifier: "ar"))
+//                .environment(\.layoutDirection, .rightToLeft)
         }
     }
 }

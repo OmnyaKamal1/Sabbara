@@ -65,6 +65,34 @@ struct WhBigButton3D: ButtonStyle {
         }
     }
 }
+struct WhSmallButton3D: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        ZStack {
+            let offset: CGFloat = 10
+            RoundedRectangle(cornerRadius: 10)
+                .frame(width: 132 , height: 50)
+                .foregroundColor(Color("LpinkShadow"))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color("LpinkShadow"), lineWidth: 2) // Add pink border here
+                )
+                .offset(y: offset)
+            
+            RoundedRectangle(cornerRadius: 10)
+                .frame(width: 132 , height: 50)
+                .foregroundColor(Color.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color("LpinkShadow"), lineWidth: 2) // Add pink border here
+                )
+                .offset(y: configuration.isPressed ? offset : 0)
+            
+            configuration.label
+                .offset(y: configuration.isPressed ? offset : 0)
+        }
+    }
+}
+
 struct MediumButton3D: ButtonStyle {
     func makeBody (configuration: Configuration) -> some View {
         ZStack {
@@ -88,7 +116,7 @@ struct SmallButtonTextModifier: ViewModifier {
         content
             .bold()
             .foregroundColor(.white)
-            .font(.custom("TufuliArabicDEMO-Medium", size: 18))
+            .font(.custom("TufuliArabicDEMO-Medium", size: 24))
         //.font(.system(size: 24))
         
     }}
